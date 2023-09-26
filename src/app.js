@@ -3,6 +3,8 @@
 
 // build를 통해서 common js로 바꿔줘야 함 -> 라이브러리가 필요
 import express from "express";
+import viewRouter from "./router/viewRouter";
+import apiRouter from "./router/apiRouter";
 
 const app = express();
 
@@ -28,16 +30,18 @@ app.set("views", process.cwd() + "/src/client/html");
     next();
 }); */
 
-app.get("/", (request, response) => {
-    const homeData = {
-        data: [{ name: "철수" }, { name: "영희" }, { name: "민수" }],
-    };
-    response.render("home", homeData);
-});
+app.use("/css", express.static("src/client/css"));
+app.use("/js", express.static("src/client/js"));
+app.use("/file", express.static("src/client/file"));
 
-app.get("/introduce", (request, response) => {
-    response.render("introduce");
-});
+/* 
+    주소: /**  view만 전달해주는 router viewRouter -> ejs 파일만 전달해주는 router
+    주소: /api/** api만 전달해주는 router apiRouter -> 데이터만 전달해주는 router
+*/
+
+app.use("/", viewRouter);
+
+app.use("/api", apiRouter);
 
 /* 
     port 
