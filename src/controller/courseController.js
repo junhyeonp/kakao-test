@@ -12,7 +12,7 @@ const QUERY = `
     ON c.course_id = uc.course_id
     AND uc.user_id = ?`
 
-  const courseList = await db.execute(QUERY, [1]).then((result) => result[0]);
+  const courseList = await db.execute(QUERY, userId).then((result) => result[0]);
   
   response.json(courseList);
 }
