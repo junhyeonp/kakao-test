@@ -158,9 +158,6 @@ const afterGetCourseList = () => {
 // 백엔드 서버로 코스정보 요청
 const getCourseListFetch = async() => {
     const response = await fetch("/api/courses")
-    if(!response,ok) {
-        response = await fetch("https://port-0-kakao-test-iciy2almztlu5g.sel5.cloudtype.app/api/courses")
-    }
     console.log(response)
     const result = await response.json();
     courseListInfo = result;
